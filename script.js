@@ -1,76 +1,71 @@
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // ============================================
-    // 1. تأثير الظهور التدريجي (Animate on Scroll)
-    // ============================================
-    const observerOptions = {
-        root: null, 
-        rootMargin: "0px",
-        threshold: 0.1 
-    };
 
-    const sections = document.querySelectorAll('.animate-on-scroll');
-    
-    const observer = new IntersectionObserver((entries, observer) => {
+    // 1. تأثير الكتابة التلقائية (Typing Effect) ⌨️
+    const textElement = document.querySelector('.typing-text');
+    const words = ["واقع ملموس", "قصة مؤثرة", "عمل احترافي"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            textElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 50 : 100;
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 2000; // انتظار قبل الحذف
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+    if(textElement) type();
+
+    // 2. ماوس مخصص (Custom Cursor) 🖱️
+    const cursor = document.querySelector('.cursor');
+    const cursor2 = document.querySelector('.cursor2');
+
+    document.addEventListener('mousemove', function(e){
+        if(window.innerWidth > 768) { // تشغيله فقط في الكمبيوتر
+            cursor.style.cssText = cursor2.style.cssText = "left: " + e.clientX + "px; top: " + e.clientY + "px;";
+        }
+    });
+
+    // 3. تأثير الظهور عند السكرول (Scroll Animation) 🎬
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); 
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    sections.forEach(section => {
+    document.querySelectorAll('.animate-on-scroll').forEach(section => {
         observer.observe(section);
     });
 
-    // ============================================
-    // 2. 🔍 وظيفة البحث في معرض الأعمال (مطور)
-    // ============================================
+    // 4. البحث في الأعمال 🔍
     const searchInput = document.querySelector('.search-input');
-    const projectCards = document.querySelectorAll('.portfolio-grid .project-card');
-    const portfolioGrid = document.querySelector('.portfolio-grid');
-
-    // إنشاء رسالة "لا توجد نتائج" وإخفاؤها مبدئياً
-    const noResultsMsg = document.createElement('p');
-    noResultsMsg.textContent = "عذراً، لا توجد أعمال تطابق بحثك.";
-    noResultsMsg.style.cssText = "text-align:center; color:#777; font-size:1.2rem; width:100%; display:none; padding:20px;";
-    portfolioGrid.appendChild(noResultsMsg);
+    const projectCards = document.querySelectorAll('.project-card');
 
     if(searchInput) {
         searchInput.addEventListener('keyup', function() {
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            let hasResults = false; // متغير لتتبع هل وجدنا نتائج أم لا
-
+            const val = searchInput.value.trim().toLowerCase();
             projectCards.forEach(card => {
-                const title = card.querySelector('.project-info h4').textContent.toLowerCase();
-                const description = card.querySelector('.project-info p').textContent.toLowerCase();
-
-                if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'block'; 
-                    // إضافة أنيميشن بسيط عند الظهور مرة أخرى
-                    card.style.animation = "fadeIn 0.5s ease";
-                    hasResults = true;
-                } else {
-                    card.style.display = 'none';
-                }
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(val) ? 'block' : 'none';
             });
-
-            // إظهار رسالة الخطأ لو مفيش نتائج
-            if (!hasResults) {
-                noResultsMsg.style.display = 'block';
-            } else {
-                noResultsMsg.style.display = 'none';
-            }
         });
     }
 });
-
-// إضافة Keyframes للأنيميشن داخل JS عشان ميبقاش فيه ملفات كتير
-const styleSheet = document.createElement("style");
-styleSheet.innerText = `
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}`;
-document.head.appendChild(styleSheet);
