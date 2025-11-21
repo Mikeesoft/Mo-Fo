@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Fouad | Video Editor</title>
-    <meta name="description" content="مونتير محترف، موشن جرافيكس، وتصحيح ألوان.">
+    <meta name="description" content="مونتير محترف، موشن جرافيكس، وتصحيح ألوان سينمائي.">
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -17,16 +18,20 @@
     <header>
         <div class="logo">MO<span>.FO</span></div>
         
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <nav class="main-nav">
             <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#portfolio">أعمالي</a></li>
-                <li><a href="#contact">تواصل</a></li>
+                <li><a href="#home" onclick="closeMenu()">الرئيسية</a></li>
+                <li><a href="#portfolio" onclick="closeMenu()">أعمالي</a></li>
+                <li><a href="#contact" onclick="closeMenu()">تواصل</a></li>
             </ul>
         </nav>
 
         <div class="search-bar">
-            <input type="text" placeholder="بحث في الأعمال..." class="search-input">
+            <input type="text" placeholder="بحث..." class="search-input">
             <i class="fas fa-search"></i>
         </div>
     </header>
@@ -46,16 +51,22 @@
 
     <div class="tech-stack">
         <div class="tech-slider">
-            <span><i class="fas fa-film"></i> Premiere Pro</span>
-            <span><i class="fas fa-magic"></i> After Effects</span>
-            <span><i class="fas fa-tint"></i> DaVinci Resolve</span>
-            <span><i class="fas fa-wave-square"></i> Audition</span>
-            <span><i class="fas fa-image"></i> Photoshop</span>
-            <span><i class="fas fa-film"></i> Premiere Pro</span>
-            <span><i class="fas fa-magic"></i> After Effects</span>
-            <span><i class="fas fa-tint"></i> DaVinci Resolve</span>
-            <span><i class="fas fa-wave-square"></i> Audition</span>
-            <span><i class="fas fa-image"></i> Photoshop</span>
+            <div class="tech-group">
+                <span><i class="fas fa-film"></i> Premiere Pro</span>
+                <span><i class="fas fa-magic"></i> After Effects</span>
+                <span><i class="fas fa-tint"></i> DaVinci Resolve</span>
+                <span><i class="fas fa-wave-square"></i> Audition</span>
+                <span><i class="fas fa-image"></i> Photoshop</span>
+                <span><i class="fas fa-video"></i> Cinema 4D</span>
+            </div>
+            <div class="tech-group">
+                <span><i class="fas fa-film"></i> Premiere Pro</span>
+                <span><i class="fas fa-magic"></i> After Effects</span>
+                <span><i class="fas fa-tint"></i> DaVinci Resolve</span>
+                <span><i class="fas fa-wave-square"></i> Audition</span>
+                <span><i class="fas fa-image"></i> Photoshop</span>
+                <span><i class="fas fa-video"></i> Cinema 4D</span>
+            </div>
         </div>
     </div>
 
@@ -81,7 +92,7 @@
     <section id="portfolio" class="section-padded">
         <div class="section-header animate-on-scroll">
             <h2>معرض <span>الأعمال</span></h2>
-            <p>مختارات من أحدث المشاريع التي قمت بتنفيذها</p>
+            <p>مختارات من أحدث المشاريع</p>
         </div>
 
         <div class="portfolio-grid">
@@ -94,7 +105,6 @@
                     <p>مونتير + مؤثرات صوتية</p>
                 </div>
             </div>
-
             <div class="project-card animate-on-scroll">
                 <div class="video-box">
                     <iframe src="https://www.youtube.com/embed/LXb3EKWsInQ" allowfullscreen></iframe>
@@ -104,7 +114,6 @@
                     <p>تصحيح ألوان + تقطيع سريع</p>
                 </div>
             </div>
-
             <div class="project-card animate-on-scroll">
                 <div class="video-box">
                     <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
